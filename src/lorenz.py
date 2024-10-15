@@ -23,6 +23,8 @@ def lorenz_attractor(
     ERROR: float = 0.001,
     cmap: str = "GnBu",
     plot_thickness: int = 2,
+    color_offset: float = 0.1,
+    fig_size: tuple = (1350, 900),
 ):
     plots = int(plots)
     if plots < 1:
@@ -31,7 +33,7 @@ def lorenz_attractor(
     t_eval = np.linspace(t_start, t_end, 1000 * int(t_end - t_start))
 
     fig = go.Figure()
-    color_values = np.linspace(0, 1, plots)
+    color_values = np.linspace(color_offset, 1- color_offset, plots)
 
     for plot_num in range(plots):
         perturbed_state = initial_state * (1 + (ERROR * plot_num))  # Small perturbation
@@ -75,19 +77,19 @@ def lorenz_attractor(
         scene=dict(
             xaxis=dict(
                 backgroundcolor="black",
-                gridcolor="black",
+                gridcolor="white",
                 showbackground=True,
                 zerolinecolor="white",
             ),
             yaxis=dict(
                 backgroundcolor="black",
-                gridcolor="black",
+                gridcolor="white",
                 showbackground=True,
                 zerolinecolor="white",
             ),
             zaxis=dict(
                 backgroundcolor="black",
-                gridcolor="black",
+                gridcolor="white",
                 showbackground=True,
                 zerolinecolor="white",
             ),
@@ -100,8 +102,8 @@ def lorenz_attractor(
         margin=dict(r=10, l=10, b=10, t=10),
         paper_bgcolor="black",
         plot_bgcolor="black",
-        width=1350,
-        height=900,
+        width=fig_size[0],
+        height=fig_size[1],
         font=dict(color="white"),
         showlegend=True,
     )
